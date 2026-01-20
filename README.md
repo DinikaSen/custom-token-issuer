@@ -17,6 +17,7 @@ custom-token-issuer/
     │   │               └── token/
     │   │                   └── issuer/
     │   │                       └── CustomTokenIssuer.java
+    │   │                       └── ExtendedJWTTokenIssuer.java
     │   └── resources/
     └── test/
         ├── java/
@@ -32,7 +33,8 @@ custom-token-issuer/
 
 ## CustomTokenIssuer Class
 
-The `CustomTokenIssuer` class extends `OauthTokenIssuerImpl` and provides customized token generation functionality.
+The `CustomTokenIssuer` class extends `OauthTokenIssuerImpl` and provides customized opaque token generation functionality.
+The `ExtendedJWTTokenIssuer` class extends `JWTTokenIssuer` and provides customized JWT token generation functionality.
 
 ### Features
 
@@ -41,7 +43,7 @@ The `CustomTokenIssuer` class extends `OauthTokenIssuerImpl` and provides custom
 The implementation supports dynamic access token expiry time configuration through request parameters. When requesting an access token, clients can specify a custom expiry time by including the `expiryTime` parameter in the token request.
 
 **How it works:**
-- The token issuer checks for an `expiry_time` parameter in the OAuth token request
+- The token issuer checks for an `expiry_time` parameter in the **OAuth token request**
 - If present and valid, it sets the token validity period to the specified value
 - If the parameter is missing or invalid, the default validity period is used
 - Invalid formats are logged with a warning and gracefully fall back to defaults
@@ -65,6 +67,10 @@ This will generate a JAR file in the `target/` directory.
 ```toml
 [oauth.extensions]
 token_generator = "org.wso2.custom.token.issuer.CustomTokenIssuer"
+
+[oauth.extensions.token_types.token_type]
+name="JWT"
+issuer="org.wso2.custom.token.issuer.ExtendedJWTTokenIssuer"
 ```
 
 4. Restart the WSO2 Identity Server
