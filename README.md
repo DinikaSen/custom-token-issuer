@@ -17,7 +17,7 @@ custom-token-issuer/
     │   │               └── token/
     │   │                   └── issuer/
     │   │                       └── CustomTokenIssuer.java
-    │   │                       └── ExtendedJWTTokenIssuer.java
+    │   │                       └── CustomJWTTokenIssuer.java
     │   └── resources/
     └── test/
         ├── java/
@@ -29,12 +29,12 @@ custom-token-issuer/
 - **Group ID**: org.wso2.custom.token.issuer
 - **Artifact ID**: custom-token-issuer
 - **Version**: 1.0.0
-- **Java Version**: 11
+- **Java Version**: 21
 
 ## CustomTokenIssuer Class
 
 The `CustomTokenIssuer` class extends `OauthTokenIssuerImpl` and provides customized opaque token generation functionality.
-The `ExtendedJWTTokenIssuer` class extends `JWTTokenIssuer` and provides customized JWT token generation functionality.
+The `CustomJWTTokenIssuer` class extends `JWTTokenIssuer` and provides customized JWT token generation functionality.
 
 ### Features
 
@@ -70,7 +70,7 @@ token_generator = "org.wso2.custom.token.issuer.CustomTokenIssuer"
 
 [oauth.extensions.token_types.token_type]
 name="JWT"
-issuer="org.wso2.custom.token.issuer.ExtendedJWTTokenIssuer"
+issuer="org.wso2.custom.token.issuer.CustomJWTTokenIssuer"
 ```
 
 4. Restart the WSO2 Identity Server
